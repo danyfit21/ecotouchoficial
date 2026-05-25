@@ -8,6 +8,209 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <style>
+    /* =============================================
+       INDEX — MOBILE-FIRST RESPONSIVE OVERRIDES
+       ============================================= */
+
+    /* Hero grid */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-visual { position: relative; }
+
+    /* Floating badges */
+    .hero-badge {
+      position: absolute;
+      background: linear-gradient(135deg, rgba(28,247,153,0.12), rgba(43,131,237,0.12));
+      border: 1px solid rgba(28,247,153,0.3);
+      border-radius: 16px;
+      padding: 14px 18px;
+      backdrop-filter: blur(12px);
+      z-index: 3;
+    }
+    .hero-badge-num {
+      font-family: var(--font-brand);
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #1cf799, #2b83ed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .hero-badge-label { font-size: 0.75rem; color: rgba(255,255,255,0.55); margin-top: 4px; }
+
+    /* Solar 2-col grid */
+    .solar-teaser-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    /* Projects 3-col */
+    .projects-home-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    /* ── CLIENTS STRIP WITH LOGOS ── */
+    .client-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      white-space: nowrap;
+    }
+    .client-pill-logo {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.08);
+      padding: 2px;
+      flex-shrink: 0;
+    }
+    .client-pill-name {
+      font-size: 0.88rem;
+      font-family: var(--font-brand);
+      font-weight: 600;
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* ============================================
+       TABLET  ≤ 1024px
+       ============================================ */
+    @media (max-width: 1024px) {
+      .hero-grid { gap: 36px; }
+      .solar-teaser-grid { gap: 48px; }
+    }
+
+    /* ============================================
+       MOBILE  ≤ 768px  — main breakpoint
+       ============================================ */
+    @media (max-width: 768px) {
+
+      /* --- HERO --- */
+      .hero { padding-top: 90px !important; }
+
+      .hero-grid {
+        grid-template-columns: 1fr !important;
+        gap: 36px;
+      }
+
+      /* Hide large right-column visual on mobile to keep hero clean */
+      .hero-visual { display: none; }
+
+      /* Hero content centered on mobile */
+      .hero-content { text-align: center; }
+      .hero-content .tag { margin: 0 auto 20px; }
+
+      /* Button row → column */
+      .hero-actions {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+      }
+      .hero-actions .btn { width: 100%; justify-content: center; }
+
+      /* Show a condensed visual below hero text on mobile */
+      .hero-visual-mobile {
+        display: flex !important;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 8px;
+      }
+      .hero-stat-pill {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid var(--border);
+        border-radius: 100px;
+      }
+      .hero-stat-num {
+        font-family: var(--font-brand);
+        font-size: 1.1rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #1cf799, #2b83ed);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .hero-stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.55); }
+
+      /* --- METRICS --- */
+      .metrics-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+      }
+      .metric-card:last-child { grid-column: 1 / -1; }
+
+      /* --- SOLUTIONS SPLIT --- */
+      .solutions-split {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+      }
+      .sol-card { min-height: 280px !important; }
+
+      /* --- WHY GRID --- */
+      .why-grid { grid-template-columns: 1fr !important; }
+
+      /* --- SOLAR TEASER --- */
+      .solar-teaser-grid {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+      }
+      .solar-teaser-grid .img-frame { aspect-ratio: 16/9 !important; }
+
+      /* --- PROJECTS GRID --- */
+      .projects-home-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+
+      /* --- CTA ACTIONS --- */
+      .cta-actions {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+      }
+      .cta-actions .btn { width: 100%; justify-content: center; }
+
+      /* --- FOOTER --- */
+      .footer-grid {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+      }
+      .footer-bottom {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 8px !important;
+      }
+
+      /* --- SECTION SPACING --- */
+      .section { padding: 60px 0 !important; }
+      .section-sm { padding: 40px 0 !important; }
+    }
+
+    /* ============================================
+       SMALL PHONES  ≤ 480px
+       ============================================ */
+    @media (max-width: 480px) {
+      .metrics-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      .container { padding: 0 16px !important; }
+      h1 { font-size: 2rem !important; }
+      h2 { font-size: 1.5rem !important; }
+    }
+  </style>
 </head>
 <body>
 
@@ -16,7 +219,7 @@
   <div class="container">
     <div class="header-inner">
       <a href="index.html" class="logo">
-        <img src="assets/isotipo-color.png" alt="EcoTouch Logo" class="logo-img">
+        <img src="isotipo-color.png" alt="EcoTouch Logo" class="logo-img">
         <span class="logo-text">EcoTouch</span>
       </a>
       <nav class="nav">
@@ -55,13 +258,13 @@
   <div class="hero-bg">
     <div class="hero-mesh"></div>
     <div class="grid-bg"></div>
-    <!-- Glow orbs -->
     <div class="orb orb-green" style="width:600px;height:600px;top:-100px;left:-150px;opacity:0.6"></div>
     <div class="orb orb-blue" style="width:700px;height:700px;bottom:-200px;right:-100px;opacity:0.5"></div>
   </div>
 
   <div class="container" style="position:relative;z-index:2;padding-top:40px;padding-bottom:60px">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
+    <div class="hero-grid">
+
       <!-- Left: Content -->
       <div class="hero-content" style="max-width:100%">
         <div class="tag">Ecuador · Tecnología de Vanguardia · Desde 2019</div>
@@ -71,44 +274,58 @@
         <p class="hero-sub">
           En EcoTouch conectamos a Ecuador con soluciones tecnológicas avanzadas: pantallas interactivas, energía solar y proyectos de innovación para educación y empresas.
         </p>
-        <div class="hero-actions">
+        <div class="hero-actions" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px">
           <a href="https://wa.me/593999819542" target="_blank" class="btn btn-primary btn-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Hablar con un asesor
           </a>
-          <a href="#soluciones" class="btn btn-outline btn-lg">Ver soluciones</a>
-          <a href="contacto.html" class="btn btn-ghost btn-lg">
-            Solicitar propuesta
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
+          <a href="contacto.html" class="btn btn-outline btn-lg">Solicitar propuesta</a>
+        </div>
+
+        <!-- Mini stats — shown only on mobile in place of hero image -->
+        <div class="hero-visual-mobile" style="display:none;margin-top:32px">
+          <div class="hero-stat-pill">
+            <span class="hero-stat-num">700+</span>
+            <span class="hero-stat-label">Pantallas</span>
+          </div>
+          <div class="hero-stat-pill">
+            <span class="hero-stat-num">40+</span>
+            <span class="hero-stat-label">Instituciones</span>
+          </div>
+          <div class="hero-stat-pill">
+            <span class="hero-stat-num">100k+</span>
+            <span class="hero-stat-label">Alumnos</span>
+          </div>
+          <div class="hero-stat-pill">
+            <span class="hero-stat-num">5 años</span>
+            <span class="hero-stat-label">Garantía</span>
+          </div>
         </div>
       </div>
 
-      <!-- Right: Visual -->
-      <div style="position:relative">
-        <!-- Main image frame -->
+      <!-- Right: Visual (hidden on mobile) -->
+      <div class="hero-visual">
         <div class="hero-img-frame" style="aspect-ratio:4/3;border-radius:24px;overflow:hidden;position:relative;border:1px solid rgba(28,247,153,0.2);box-shadow:0 30px 80px rgba(43,131,237,0.2)">
-          <!-- Replace this div with: <img src="assets/hero-main.jpg" alt="Pantalla interactiva EcoTouch"> -->
+          <!-- Reemplazar con: <img src="hero-main.jpg" alt="Pantalla interactiva EcoTouch" style="width:100%;height:100%;object-fit:cover"> -->
           <div style="width:100%;height:100%;background:linear-gradient(135deg,rgba(0,47,86,0.9),rgba(43,131,237,0.3));display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:rgba(255,255,255,0.3);font-family:var(--font-brand);font-size:0.8rem;text-align:center;padding:30px">
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            <span>Coloca aquí tu imagen principal<br><strong>assets/hero-main.jpg</strong><br>(ej: pantalla interactiva en aula)</span>
+            <span>Imagen principal<br><strong>hero-main.jpg</strong></span>
           </div>
         </div>
-        <!-- Floating badge 1 -->
-        <div style="position:absolute;top:-16px;right:-16px;background:linear-gradient(135deg,rgba(28,247,153,0.15),rgba(43,131,237,0.15));border:1px solid rgba(28,247,153,0.3);border-radius:16px;padding:16px 20px;backdrop-filter:blur(12px)">
-          <div style="font-family:var(--font-brand);font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,#1cf799,#2b83ed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1">700+</div>
-          <div style="font-size:0.78rem;color:rgba(255,255,255,0.55);margin-top:4px">Pantallas entregadas</div>
+        <!-- Floating badges -->
+        <div class="hero-badge" style="top:-16px;right:-16px">
+          <div class="hero-badge-num">700+</div>
+          <div class="hero-badge-label">Pantallas entregadas</div>
         </div>
-        <!-- Floating badge 2 -->
-        <div style="position:absolute;bottom:-16px;left:-16px;background:linear-gradient(135deg,rgba(43,131,237,0.15),rgba(0,47,86,0.8));border:1px solid rgba(43,131,237,0.3);border-radius:16px;padding:16px 20px;backdrop-filter:blur(12px)">
-          <div style="font-family:var(--font-brand);font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,#2b83ed,#1cf799);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1">100k+</div>
-          <div style="font-size:0.78rem;color:rgba(255,255,255,0.55);margin-top:4px">Alumnos beneficiados</div>
+        <div class="hero-badge" style="bottom:-16px;left:-16px;background:linear-gradient(135deg,rgba(43,131,237,0.15),rgba(0,47,86,0.8));border-color:rgba(43,131,237,0.3)">
+          <div class="hero-badge-num">100k+</div>
+          <div class="hero-badge-label">Alumnos beneficiados</div>
         </div>
       </div>
+
     </div>
   </div>
 
-  <!-- Scroll hint -->
   <div class="scroll-hint">
     <span>Scroll</span>
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
@@ -157,10 +374,9 @@
     </div>
 
     <div class="solutions-split">
-      <!-- Pantallas -->
       <a href="pantallas.html" class="sol-card sol-card-screens reveal-left" style="text-decoration:none">
         <div class="sol-img-frame">
-          <!-- Replace with: <img src="assets/sol-pantallas.jpg" alt="Pantallas interactivas"> -->
+          <!-- Reemplazar con: <img src="sol-pantallas.jpg" alt="Pantallas interactivas" style="width:100%;height:100%;object-fit:cover"> -->
           <div style="width:100%;height:100%;background:linear-gradient(135deg,rgba(0,30,70,0.6),rgba(43,131,237,0.15))"></div>
         </div>
         <div class="sol-card-content">
@@ -176,10 +392,9 @@
         </div>
       </a>
 
-      <!-- Solar -->
       <a href="energia-solar.html" class="sol-card sol-card-solar reveal-right" style="text-decoration:none">
         <div class="sol-img-frame">
-          <!-- Replace with: <img src="assets/sol-solar.jpg" alt="Energía Solar"> -->
+          <!-- Reemplazar con: <img src="sol-solar.jpg" alt="Energía Solar" style="width:100%;height:100%;object-fit:cover"> -->
           <div style="width:100%;height:100%;background:linear-gradient(135deg,rgba(0,30,10,0.6),rgba(28,247,153,0.1))"></div>
         </div>
         <div class="sol-card-content">
@@ -208,7 +423,6 @@
       <h2>No somos solo proveedores. Somos <span class="grad-text">aliados estratégicos.</span></h2>
       <p>La diferencia está en el acompañamiento: desde la asesoría inicial hasta el soporte técnico continuo.</p>
     </div>
-
     <div class="why-grid stagger">
       <div class="why-card reveal">
         <div class="why-num">01</div>
@@ -235,7 +449,7 @@
         <div class="why-num">04</div>
         <div>
           <h4>Tecnología de vanguardia internacional</h4>
-          <p>Conectamos al mercado ecuatoriano con fabricantes de primer nivel de China, con control de calidad riguroso.</p>
+          <p>Conectamos al mercado ecuatoriano con fabricantes de primer nivel, con control de calidad riguroso.</p>
         </div>
       </div>
       <div class="why-card reveal">
@@ -257,7 +471,7 @@
 </section>
 
 <!-- ================================================
-  CLIENTS STRIP
+  CLIENTS STRIP — con logos de instituciones
 ================================================ -->
 <section class="section-sm" style="position:relative">
   <div class="container">
@@ -268,36 +482,125 @@
   </div>
   <div class="clients-strip">
     <div class="clients-track">
-      <!-- First set -->
-      <span class="client-pill">🎓 Universidad Espíritu Santo / UEES</span>
-      <span class="client-pill">🎓 Universidad San Francisco de Quito</span>
-      <span class="client-pill">🎓 Universidad ECOTEC</span>
-      <span class="client-pill">🎓 PUCE Manabí</span>
-      <span class="client-pill">🎓 U. Laica Eloy Alfaro de Manabí</span>
-      <span class="client-pill">🎓 Universidad Técnica de Machala</span>
-      <span class="client-pill">🏫 Unidad Educativa La Moderna</span>
-      <span class="client-pill">🏫 Monte Tabor</span>
-      <span class="client-pill">🏫 Thomas More</span>
-      <span class="client-pill">🏫 Liceo Naval de Guayaquil</span>
-      <span class="client-pill">📚 Editorial Educatemas</span>
-      <span class="client-pill">💼 Samara Tech</span>
-      <span class="client-pill">🎓 Instituto Superior Adventista del Ecuador</span>
-      <span class="client-pill">🎓 Instituto Tecnológico Superior Quito</span>
-      <!-- Duplicate for infinite scroll -->
-      <span class="client-pill">🎓 Universidad Espíritu Santo / UEES</span>
-      <span class="client-pill">🎓 Universidad San Francisco de Quito</span>
-      <span class="client-pill">🎓 Universidad ECOTEC</span>
-      <span class="client-pill">🎓 PUCE Manabí</span>
-      <span class="client-pill">🎓 U. Laica Eloy Alfaro de Manabí</span>
-      <span class="client-pill">🎓 Universidad Técnica de Machala</span>
-      <span class="client-pill">🏫 Unidad Educativa La Moderna</span>
-      <span class="client-pill">🏫 Monte Tabor</span>
-      <span class="client-pill">🏫 Thomas More</span>
-      <span class="client-pill">🏫 Liceo Naval de Guayaquil</span>
-      <span class="client-pill">📚 Editorial Educatemas</span>
-      <span class="client-pill">💼 Samara Tech</span>
-      <span class="client-pill">🎓 Instituto Superior Adventista del Ecuador</span>
-      <span class="client-pill">🎓 Instituto Tecnológico Superior Quito</span>
+      <!-- ══ PRIMERA PASADA ══
+           Reemplaza cada <img> con el logo real de la institución.
+           Si no tienes el logo, simplemente borra la etiqueta <img>
+           y quedará solo el nombre. -->
+
+      <div class="client-pill">
+        <img src="logo-uees.png" alt="UEES" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Universidad Espíritu Santo</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-usfq.png" alt="USFQ" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Universidad San Francisco de Quito</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-ecotec.png" alt="ECOTEC" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Universidad ECOTEC</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-puce.png" alt="PUCE" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">PUCE Manabí</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-laica.png" alt="U. Laica" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">U. Laica Eloy Alfaro de Manabí</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-tecnica-machala.png" alt="U. Técnica Machala" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Universidad Técnica de Machala</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-la-moderna.png" alt="La Moderna" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Unidad Educativa La Moderna</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-monte-tabor.png" alt="Monte Tabor" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Monte Tabor</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-thomas-more.png" alt="Thomas More" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Thomas More</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-liceo-naval.png" alt="Liceo Naval" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Liceo Naval de Guayaquil</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-educatemas.png" alt="Educatemas" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Editorial Educatemas</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-samara.png" alt="Samara Tech" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Samara Tech</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-adventista.png" alt="Inst. Adventista" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Instituto Superior Adventista</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-its-quito.png" alt="ITS Quito" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Instituto Tecnológico Superior Quito</span>
+      </div>
+
+      <!-- ══ DUPLICADO para scroll infinito ══ -->
+      <div class="client-pill">
+        <img src="logo-uees.png" alt="UEES" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Universidad Espíritu Santo</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-usfq.png" alt="USFQ" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Universidad San Francisco de Quito</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-ecotec.png" alt="ECOTEC" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Universidad ECOTEC</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-puce.png" alt="PUCE" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">PUCE Manabí</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-laica.png" alt="U. Laica" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">U. Laica Eloy Alfaro de Manabí</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-tecnica-machala.png" alt="U. Técnica Machala" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Universidad Técnica de Machala</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-la-moderna.png" alt="La Moderna" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Unidad Educativa La Moderna</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-monte-tabor.png" alt="Monte Tabor" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Monte Tabor</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-thomas-more.png" alt="Thomas More" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Thomas More</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-liceo-naval.png" alt="Liceo Naval" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Liceo Naval de Guayaquil</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-educatemas.png" alt="Educatemas" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Editorial Educatemas</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-samara.png" alt="Samara Tech" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Samara Tech</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-adventista.png" alt="Inst. Adventista" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Instituto Superior Adventista</span>
+      </div>
+      <div class="client-pill">
+        <img src="logo-its-quito.png" alt="ITS Quito" class="client-pill-logo" onerror="this.style.display='none'">
+        <span class="client-pill-name">Instituto Tecnológico Superior Quito</span>
+      </div>
     </div>
   </div>
 </section>
@@ -307,18 +610,16 @@
 ================================================ -->
 <section class="section">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
-      <!-- Visual -->
+    <div class="solar-teaser-grid">
       <div class="reveal-left">
         <div class="img-frame" style="aspect-ratio:4/3;background:linear-gradient(135deg,rgba(0,30,10,0.9),rgba(28,247,153,0.15));border-color:rgba(28,247,153,0.2)">
-          <!-- Replace with: <img src="assets/solar-preview.jpg" alt="Energía Solar EcoTouch"> -->
+          <!-- Reemplazar con: <img src="solar-preview.jpg" alt="Energía Solar EcoTouch" style="width:100%;height:100%;object-fit:cover"> -->
           <div class="img-placeholder">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
-            <span>Imagen: instalación solar<br><strong>assets/solar-preview.jpg</strong></span>
+            <span>Imagen instalación solar<br><strong>solar-preview.jpg</strong></span>
           </div>
         </div>
       </div>
-      <!-- Content -->
       <div class="reveal-right">
         <div class="tag">Nueva línea</div>
         <h2>Ahora también <span class="grad-text">Energía Solar</span></h2>
@@ -367,14 +668,13 @@
       </a>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px" class="stagger">
-      <!-- Case 1 -->
+    <div class="projects-home-grid stagger">
       <div class="project-card reveal">
         <div class="project-img">
-          <!-- Replace with: <img src="assets/case-uees.jpg" alt="UEES"> -->
+          <!-- Reemplazar con: <img src="case-uees.jpg" alt="UEES" style="width:100%;height:100%;object-fit:cover"> -->
           <div class="project-img-placeholder">
             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>
-            <span>assets/case-uees.jpg</span>
+            <span>case-uees.jpg</span>
           </div>
           <div class="project-type" style="background:rgba(43,131,237,0.3);color:#7ec8ff;border:1px solid rgba(43,131,237,0.4)">Pantallas Interactivas</div>
         </div>
@@ -388,12 +688,13 @@
           </div>
         </div>
       </div>
-      <!-- Case 2 -->
+
       <div class="project-card reveal">
         <div class="project-img">
+          <!-- Reemplazar con: <img src="case-moderna.jpg" alt="La Moderna" style="width:100%;height:100%;object-fit:cover"> -->
           <div class="project-img-placeholder">
             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>
-            <span>assets/case-moderna.jpg</span>
+            <span>case-moderna.jpg</span>
           </div>
           <div class="project-type" style="background:rgba(28,247,153,0.2);color:#7affc8;border:1px solid rgba(28,247,153,0.35)">Educación K-12</div>
         </div>
@@ -407,12 +708,13 @@
           </div>
         </div>
       </div>
-      <!-- Case 3 -->
+
       <div class="project-card reveal">
         <div class="project-img">
+          <!-- Reemplazar con: <img src="case-liceo.jpg" alt="Liceo Naval" style="width:100%;height:100%;object-fit:cover"> -->
           <div class="project-img-placeholder">
             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>
-            <span>assets/case-liceo.jpg</span>
+            <span>case-liceo.jpg</span>
           </div>
           <div class="project-type" style="background:rgba(43,131,237,0.3);color:#7ec8ff;border:1px solid rgba(43,131,237,0.4)">Institución Naval</div>
         </div>
@@ -442,7 +744,7 @@
         <div class="tag" style="margin:0 auto 20px;display:inline-flex">¿Listo para avanzar?</div>
         <h2>¿Tu institución está lista para el siguiente salto tecnológico?</h2>
         <p>Habla con nuestro equipo hoy. Sin compromisos, con asesoría real y enfocada en tus necesidades.</p>
-        <div class="cta-actions">
+        <div class="cta-actions" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;justify-content:center">
           <a href="https://wa.me/593999819542" target="_blank" class="btn btn-wa btn-lg">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             WhatsApp
@@ -467,7 +769,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="logo">
-          <svg width="36" height="36" viewBox="0 0 100 100" fill="none"><path d="M72 28C72 28 82 38 82 55C82 68 72 78 58 78C44 78 34 68 34 55C34 42 42 36 50 36C58 36 64 42 64 50C64 54 62 58 58 60" stroke="url(#flg1)" stroke-width="9" stroke-linecap="round"/><path d="M28 62C28 62 18 52 18 35C18 22 28 12 42 12C56 12 66 22 66 35" stroke="url(#flg2)" stroke-width="9" stroke-linecap="round"/><defs><linearGradient id="flg1" x1="34" y1="28" x2="82" y2="78" gradientUnits="userSpaceOnUse"><stop stop-color="#1cf799"/><stop offset="1" stop-color="#2b83ed"/></linearGradient><linearGradient id="flg2" x1="18" y1="12" x2="66" y2="62" gradientUnits="userSpaceOnUse"><stop stop-color="#2b83ed"/><stop offset="1" stop-color="#1cf799"/></linearGradient></defs></svg>
+          <img src="isotipo-color.png" alt="EcoTouch Logo" class="logo-img">
           <span class="logo-text">EcoTouch</span>
         </a>
         <p>El puente entre la tecnología de vanguardia y las instituciones que lideran el futuro del Ecuador.</p>
