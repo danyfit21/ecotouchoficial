@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyectos y Casos de Éxito — EcoTouch Ecuador</title>
+  <meta name="description" content="Más de 40 instituciones ya transformaron sus espacios con EcoTouch. Conoce los proyectos de pantallas interactivas implementados en universidades y colegios del Ecuador.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <style>
+    /* ── PAGE-SPECIFIC STYLES ── */
+    .proj-hero { padding: 180px 0 100px; position: relative; overflow: hidden; }
+    .proj-hero::before { content:''; position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(43,131,237,0.18) 0%, transparent 70%); }
+    .proj-hero-inner { max-width: 700px; margin: 0 auto; text-align: center; position: relative; z-index: 2; }
+    .proj-hero-inner .tag { margin: 0 auto 24px; }
+
+    /* Stats bar */
+    .stats-bar { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 32px 0; margin-bottom: 80px; }
+    .stats-bar-inner { display: grid; grid-template-columns: repeat(5, 1fr); divide: 1px solid var(--border); }
+    .stat-item { text-align: center; padding: 8px 20px; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-brand); font-size: 2.2rem; font-weight: 700; background: linear-gradient(135deg, var(--green), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.55); margin-top: 4px; }
+
+    /* Filter bar */
+    .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 48px; }
+    .filter-btn { padding: 8px 20px; border-radius: 100px; border: 1px solid var(--border); background: var(--bg-card); color: rgba(255,255,255,0.65); font-size: 0.85rem; font-family: var(--font-body); cursor: pointer; transition: all 0.25s var(--ease); }
+    .filter-btn:hover, .filter-btn.active { border-color: var(--green); color: var(--green); background: rgba(28,247,153,0.08); }
+
+    /* Projects grid */
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 80px; }
+    .proj-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; transition: all 0.4s var(--ease); cursor: default; }
+    .proj-card:hover { border-color: rgba(28,247,153,0.35); transform: translateY(-6px); box-shadow: var(--shadow-green); }
+    .proj-img { aspect-ratio: 16/10; position: relative; overflow: hidden; }
+    .proj-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; color: rgba(255,255,255,0.25); font-size: 0.7rem; font-family: var(--font-brand); text-align: center; padding: 20px; }
+    .proj-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease); }
+    .proj-card:hover .proj-img img { transform: scale(1.04); }
+    .proj-body { padding: 24px; }
+    .proj-type { font-size: 0.75rem; font-family: var(--font-brand); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+    .proj-type.screen { color: var(--blue); }
+    .proj-type.solar { color: var(--green); }
+    .proj-type.mixed { color: #c084fc; }
+    .proj-name { font-family: var(--font-brand); font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; color: var(--white); }
+    .proj-desc { font-size: 0.88rem; color: rgba(255,255,255,0.58); line-height: 1.65; margin-bottom: 16px; }
+    .proj-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .proj-tag { font-size: 0.72rem; padding: 3px 10px; border-radius: 100px; background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); border: 1px solid var(--border); }
+
+    /* Featured project */
+    .proj-featured { background: linear-gradient(135deg, rgba(0,47,86,0.6), rgba(43,131,237,0.12)); border: 1px solid rgba(43,131,237,0.3); border-radius: var(--r-xl); padding: 60px; margin-bottom: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .proj-featured-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(28,247,153,0.1); border: 1px solid rgba(28,247,153,0.3); border-radius: 100px; font-size: 0.8rem; color: var(--green); margin-bottom: 20px; }
+    .proj-featured h3 { font-size: clamp(1.5rem, 2.5vw, 2rem); margin-bottom: 16px; }
+    .proj-result { background: rgba(0,0,0,0.3); border-radius: var(--r-md); padding: 20px; margin-top: 24px; border-left: 3px solid var(--green); }
+    .proj-result-label { font-size: 0.75rem; color: var(--green); font-family: var(--font-brand); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+    .proj-visual-lg { aspect-ratio: 4/3; border-radius: var(--r-lg); overflow: hidden; border: 1px solid rgba(28,247,153,0.2); }
+    .proj-visual-placeholder { width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;background:linear-gradient(135deg,rgba(0,47,86,0.9),rgba(43,131,237,0.3));color:rgba(255,255,255,0.25);font-size:0.75rem;font-family:var(--font-brand);text-align:center;padding:30px }
+
+    /* Institutions section */
+    .institutions-section { margin-bottom: 80px; }
+    .inst-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 48px; }
+    .inst-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-md); padding: 24px 20px; text-align: center; transition: all 0.3s var(--ease); }
+    .inst-card:hover { border-color: rgba(43,131,237,0.4); background: rgba(43,131,237,0.07); transform: translateY(-3px); }
+    .inst-initial { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, rgba(28,247,153,0.15), rgba(43,131,237,0.15)); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-family: var(--font-brand); font-size: 1.1rem; font-weight: 700; color: var(--blue); border: 1px solid rgba(43,131,237,0.2); }
+    .inst-name { font-family: var(--font-brand); font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .inst-type { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+
+    /* Process section */
+    .process-section { margin-bottom: 80px; }
+    .process-track { position: relative; margin-top: 60px; }
+    .process-line { position: absolute; top: 36px; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--border), var(--border), transparent); z-index: 0; }
+    .process-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; position: relative; z-index: 1; }
+    .process-step { text-align: center; }
+    .process-num { width: 72px; height: 72px; border-radius: 50%; background: var(--bg-dark); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: var(--font-brand); font-size: 1.3rem; font-weight: 700; color: var(--blue); transition: all 0.3s var(--ease); position: relative; }
+    .process-step:hover .process-num { border-color: var(--green); color: var(--green); box-shadow: 0 0 20px rgba(28,247,153,0.3); }
+    .process-step h4 { font-size: 0.95rem; margin-bottom: 8px; }
+    .process-step p { font-size: 0.8rem; }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .inst-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .proj-featured { grid-template-columns: 1fr; padding: 40px 30px; }
+      .stats-bar-inner { grid-template-columns: repeat(3, 1fr); }
+      .stat-item:nth-child(3) { border-right: none; }
+      .stat-item:nth-child(4), .stat-item:nth-child(5) { border-top: 1px solid var(--border); }
+      .process-steps { grid-template-columns: 1fr; }
+      .process-line { display: none; }
+    }
+    @media (max-width: 768px) {
+      .projects-grid { grid-template-columns: 1fr; }
+      .inst-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="mainHeader">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="assets/isotipo-color.png" alt="EcoTouch Logo" class="logo-img">
+        <span class="logo-text">EcoTouch</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html">Inicio</a>
+        <a href="pantallas.html">Pantallas Interactivas</a>
+        <a href="energia-solar.html">Energía Solar</a>
+        <a href="proyectos.html" class="active">Proyectos</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+      <div class="header-cta">
+        <a href="contacto.html" class="btn btn-outline btn-sm">Solicitar propuesta</a>
+        <a href="https://wa.me/593999819542" target="_blank" class="btn btn-primary btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <button class="menu-toggle" aria-label="Menú"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav">
+  <a href="index.html">Inicio</a>
+  <a href="pantallas.html">Pantallas Interactivas</a>
+  <a href="energia-solar.html">Energía Solar</a>
+  <a href="proyectos.html">Proyectos</a>
+  <a href="nosotros.html">Nosotros</a>
+  <a href="contacto.html">Contacto</a>
+  <a href="https://wa.me/593999819542" target="_blank" class="btn btn-wa">Escribir por WhatsApp</a>
+</nav>
+
+<!-- HERO -->
+<section class="proj-hero">
+  <div class="orb orb-blue" style="width:500px;height:500px;top:-200px;right:-100px;opacity:0.3"></div>
+  <div class="orb orb-green" style="width:400px;height:400px;bottom:-100px;left:-50px;opacity:0.2"></div>
+  <div class="container">
+    <div class="proj-hero-inner reveal">
+      <div class="tag">+40 Instituciones · +700 Pantallas · Ecuador</div>
+      <h1>Proyectos que <span class="grad-text">transformaron</span> instituciones</h1>
+      <p class="lead" style="margin-top:20px">Cada proyecto es una historia de colaboración, implementación y resultados reales. Desde universidades hasta colegios privados, EcoTouch ha llevado tecnología avanzada a los espacios más importantes del Ecuador.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<section style="padding-bottom:80px">
+  <div class="container">
+    <div class="stats-bar reveal">
+      <div class="stats-bar-inner">
+        <div class="stat-item">
+          <div class="stat-num" data-counter data-target="700" data-suffix="+">0</div>
+          <div class="stat-label">Pantallas entregadas</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-counter data-target="40" data-suffix="+">0</div>
+          <div class="stat-label">Instituciones atendidas</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-counter data-target="100" data-suffix="k+">0</div>
+          <div class="stat-label">Alumnos beneficiados</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-counter data-target="6" data-suffix=" años">0</div>
+          <div class="stat-label">De trayectoria</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" data-counter data-target="5" data-suffix=" años">0</div>
+          <div class="stat-label">Garantía</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROJECT -->
+<section style="padding-bottom:80px">
+  <div class="container">
+    <div class="proj-featured reveal">
+      <div>
+        <div class="proj-featured-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Proyecto Destacado
+        </div>
+        <h3>Universidad ECOTEC — <span class="grad-text">Transformación Digital de Aulas</span></h3>
+        <p style="margin-top:12px">Implementación integral de pantallas interactivas de alta resolución en múltiples aulas y espacios de capacitación. El proyecto incluyó instalación, configuración de red, capacitación docente y soporte técnico extendido.</p>
+        <div class="proj-result">
+          <div class="proj-result-label">Impacto del proyecto</div>
+          <p style="color:rgba(255,255,255,0.75);font-size:0.9rem">Actualización tecnológica de espacios educativos, incremento en la participación estudiantil y adopción de metodologías pedagógicas modernas con recursos digitales interactivos.</p>
+        </div>
+        <div class="proj-tags" style="margin-top:20px">
+          <span class="proj-tag">Educación Superior</span>
+          <span class="proj-tag">Pantallas Interactivas</span>
+          <span class="proj-tag">Capacitación Docente</span>
+          <span class="proj-tag">Guayaquil</span>
+        </div>
+      </div>
+      <div class="proj-visual-lg">
+        <!-- Replace with: <img src="assets/case-ecotec.jpg" alt="Proyecto ECOTEC"> -->
+        <div class="proj-visual-placeholder">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.4"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <span>Reemplazar con:<br>assets/case-ecotec.jpg</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALL PROJECTS -->
+<section style="padding-bottom:100px">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:36px" class="reveal">
+      <div>
+        <div class="section-tag">Todos los proyectos</div>
+        <h2 style="margin-top:12px">Casos de <span class="grad-text">éxito</span></h2>
+      </div>
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="screen">Pantallas</button>
+        <button class="filter-btn" data-filter="edu">Educación</button>
+        <button class="filter-btn" data-filter="corp">Corporativo</button>
+      </div>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- Card 1 -->
+      <div class="proj-card reveal" data-category="screen edu">
+        <div class="proj-img">
+          <!-- Replace with: <img src="assets/case-uees.jpg" alt="UEES"> -->
+          <div class="proj-img-placeholder" style="background:linear-gradient(135deg,rgba(0,47,86,0.95),rgba(43,131,237,0.4))">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>assets/case-uees.jpg</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-type screen">Pantallas Interactivas</div>
+          <div class="proj-name">Universidad Espíritu Santo (UEES)</div>
+          <p class="proj-desc">Modernización de aulas con pantallas interactivas de última generación para fortalecer procesos de enseñanza-aprendizaje y colaboración en tiempo real.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Educación Superior</span>
+            <span class="proj-tag">Guayaquil</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="proj-card reveal" data-category="screen edu">
+        <div class="proj-img">
+          <!-- Replace with: <img src="assets/case-usfq.jpg" alt="USFQ"> -->
+          <div class="proj-img-placeholder" style="background:linear-gradient(135deg,rgba(0,20,50,0.95),rgba(28,247,153,0.2))">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>assets/case-usfq.jpg</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-type screen">Pantallas Interactivas</div>
+          <div class="proj-name">Universidad San Francisco de Quito</div>
+          <p class="proj-desc">Implementación de soluciones interactivas en espacios académicos y salas de reunión para potenciar el trabajo colaborativo entre docentes y estudiantes.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Educación Superior</span>
+            <span class="proj-tag">Quito</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="proj-card reveal" data-category="screen edu">
+        <div class="proj-img">
+          <!-- Replace with: <img src="assets/case-moderna.jpg" alt="La Moderna"> -->
+          <div class="proj-img-placeholder" style="background:linear-gradient(135deg,rgba(0,47,86,0.95),rgba(43,131,237,0.35))">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <span>assets/case-moderna.jpg</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-type screen">Pantallas Interactivas</div>
+          <div class="proj-name">Unidad Educativa La Moderna</div>
+          <p class="proj-desc">Transformación de aulas con tecnología interactiva que permitió implementar metodologías activas, gamificación y recursos multimedia en el proceso educativo.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Educación K-12</span>
+            <span class="proj-tag">Capacitación Docente</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="proj-card reveal" data-category="screen edu">
+        <div class="proj-img">
+          <!-- Replace with: <img src="assets/case-liceo.jpg" alt="Liceo Naval"> -->
+          <div class="proj-img-placeholder" style="background:linear-gradient(135deg,rgba(0,15,40,0.95),rgba(43,131,237,0.4))">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <span>assets/case-liceo.jpg</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-type screen">Pantallas Interactivas</div>
+          <div class="proj-name">Liceo Naval de Guayaquil</div>
+          <p class="proj-desc">Equipamiento tecnológico de aulas con pantallas interactivas de alto rendimiento para potenciar la enseñanza en una institución educativa de excelencia.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Educación K-12</span>
+            <span class="proj-tag">Guayaquil</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="proj-card reveal" data-category="screen corp">
+        <div class="proj-img">
+          <!-- Replace with: <img src="assets/case-samara.jpg" alt="Samara Tech"> -->
+          <div class="proj-img-placeholder" style="background:linear-gradient(135deg,rgba(5,30,60,0.95),rgba(28,247,153,0.25))">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <span>assets/case-samara.jpg</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-type screen">Pantallas Interactivas</div>
+          <div class="proj-name">Samara Tech</div>
+          <p class="proj-desc">Implementación de pantallas interactivas para salas de reunión, capacitación y presentaciones corporativas con integración a sistemas de videoconferencia.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Corporativo</span>
+            <span class="proj-tag">Salas de Reunión</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="proj-card reveal" data-category="screen edu">
+        <div class="proj-img">
+          <!-- Replace with: <img src="assets/case-thomas.jpg" alt="Thomas More"> -->
+          <div class="proj-img-placeholder" style="background:linear-gradient(135deg,rgba(0,47,86,0.95),rgba(43,131,237,0.3))">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <span>assets/case-thomas.jpg</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-type screen">Pantallas Interactivas</div>
+          <div class="proj-name">Unidad Educativa Thomas More</div>
+          <p class="proj-desc">Renovación tecnológica de aulas con pantallas de alta definición, soporte técnico especializado y programa de capacitación docente personalizado.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Educación K-12</span>
+            <span class="proj-tag">Capacitación</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="proj-card reveal" data-category="screen edu">
+        <div class="proj-img">
+          <!-- Replace with: <img src="assets/case-puce.jpg" alt="PUCE Manabí"> -->
+          <div class="proj-img-placeholder" style="background:linear-gradient(135deg,rgba(0,20,50,0.95),rgba(28,247,153,0.2))">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>assets/case-puce.jpg</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-type screen">Pantallas Interactivas</div>
+          <div class="proj-name">PUCE Manabí</div>
+          <p class="proj-desc">Equipamiento de laboratorios y aulas con soluciones interactivas adaptadas al contexto educativo de la Costa ecuatoriana con soporte técnico local.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Educación Superior</span>
+            <span class="proj-tag">Manabí</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="proj-card reveal" data-category="screen corp">
+        <div class="proj-img">
+          <!-- Replace with: <img src="assets/case-educatemas.jpg" alt="Editorial Educatemas"> -->
+          <div class="proj-img-placeholder" style="background:linear-gradient(135deg,rgba(0,47,86,0.95),rgba(43,131,237,0.35))">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+            <span>assets/case-educatemas.jpg</span>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-type screen">Pantallas Interactivas</div>
+          <div class="proj-name">Editorial Educatemas</div>
+          <p class="proj-desc">Implementación de pantallas interactivas para showroom educativo y espacios de capacitación, integrando contenido editorial digital con tecnología interactiva.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Educación</span>
+            <span class="proj-tag">Editorial</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 9 — More projects indicator -->
+      <div class="proj-card reveal" style="background:linear-gradient(135deg,rgba(28,247,153,0.05),rgba(43,131,237,0.08));border-color:rgba(28,247,153,0.15);display:flex;align-items:center;justify-content:center;min-height:280px">
+        <div style="text-align:center;padding:30px">
+          <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,rgba(28,247,153,0.15),rgba(43,131,237,0.15));border:1px solid rgba(28,247,153,0.25);display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="url(#ic-grad)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/><defs><linearGradient id="ic-grad" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#1cf799"/><stop offset="1" stop-color="#2b83ed"/></linearGradient></defs></svg>
+          </div>
+          <p class="grad-text" style="font-family:var(--font-brand);font-size:1.4rem;font-weight:700">+30 proyectos más</p>
+          <p style="font-size:0.85rem;margin-top:8px">Monte Tabor, U. Laica Eloy Alfaro, U. Técnica Machala, Inst. Adventista, ITS Quito y más...</p>
+          <a href="https://wa.me/593999819542" target="_blank" class="btn btn-primary btn-sm" style="margin-top:20px">Consultar portfolio</a>
+        </div>
+      </div>
+
+    </div><!-- end projects-grid -->
+  </div>
+</section>
+
+<!-- INSTITUTIONS SECTION -->
+<section class="institutions-section" style="padding:80px 0">
+  <div class="container">
+    <div style="text-align:center;max-width:600px;margin:0 auto" class="reveal">
+      <div class="section-tag">Red de confianza</div>
+      <h2 style="margin-top:16px">Instituciones que <span class="grad-text">confiaron</span> en EcoTouch</h2>
+      <p style="margin-top:16px">Universidades, colegios y empresas de todo Ecuador han elegido a EcoTouch como su aliado tecnológico.</p>
+    </div>
+    <div class="inst-grid">
+      <div class="inst-card reveal"><div class="inst-initial">UE</div><div class="inst-name">UEES</div><div class="inst-type">Universidad Espíritu Santo</div></div>
+      <div class="inst-card reveal"><div class="inst-initial">SF</div><div class="inst-name">USFQ</div><div class="inst-type">Univ. San Francisco de Quito</div></div>
+      <div class="inst-card reveal"><div class="inst-initial">EC</div><div class="inst-name">ECOTEC</div><div class="inst-type">Universidad ECOTEC</div></div>
+      <div class="inst-card reveal"><div class="inst-initial">PC</div><div class="inst-name">PUCE Manabí</div><div class="inst-type">Pontificia Univ. Católica</div></div>
+      <div class="inst-card reveal"><div class="inst-initial">UL</div><div class="inst-name">U. Laica Eloy Alfaro</div><div class="inst-type">Universidad Laica</div></div>
+      <div class="inst-card reveal"><div class="inst-initial">TM</div><div class="inst-name">U. Técnica Machala</div><div class="inst-type">Universidad Técnica</div></div>
+      <div class="inst-card reveal"><div class="inst-initial">LM</div><div class="inst-name">La Moderna</div><div class="inst-type">Unidad Educativa</div></div>
+      <div class="inst-card reveal"><div class="inst-initial">MT</div><div class="inst-name">Monte Tabor</div><div class="inst-type">Unidad Educativa</div></div>
+      <div class="inst-card reveal"><div class="inst-initial">TH</div><div class="inst-name">Thomas More</div><div class="inst-type">Unidad Educativa</div></div>
+      <div class="inst-card reveal"><div class="inst-initial">LN</div><div class="inst-name">Liceo Naval</div><div class="inst-type">Liceo Naval Guayaquil</div></div>
+      <div class="inst-card reveal"><div class="inst-initial">ST</div><div class="inst-name">Samara Tech</div><div class="inst-type">Empresa Tecnológica</div></div>
+      <div class="inst-card reveal"><div class="inst-initial">IA</div><div class="inst-name">Inst. Adventista</div><div class="inst-type">Instituto Superior</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section class="process-section" style="padding:80px 0;background:rgba(255,255,255,0.02);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div style="text-align:center;max-width:600px;margin:0 auto 20px" class="reveal">
+      <div class="section-tag">Cómo trabajamos</div>
+      <h2 style="margin-top:16px">Metodología de <span class="grad-text">implementación</span></h2>
+      <p style="margin-top:16px">Cada proyecto sigue un proceso claro que garantiza resultados óptimos, mínima disrupción operativa y máxima adopción tecnológica.</p>
+    </div>
+    <div class="process-track">
+      <div class="process-line"></div>
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <div class="process-num">01</div>
+          <h4>Diagnóstico</h4>
+          <p>Visita técnica al sitio, análisis de necesidades, medición de espacios y evaluación de infraestructura existente.</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="process-num">02</div>
+          <h4>Propuesta</h4>
+          <p>Diseño técnico personalizado, selección de equipos, cronograma y propuesta económica detallada.</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="process-num">03</div>
+          <h4>Instalación</h4>
+          <p>Instalación profesional por técnicos certificados, configuración completa y pruebas de funcionamiento.</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="process-num">04</div>
+          <h4>Capacitación</h4>
+          <p>Formación técnica y pedagógica para docentes y personal, con materiales y recursos digitales de apoyo.</p>
+        </div>
+        <div class="process-step reveal">
+          <div class="process-num">05</div>
+          <h4>Soporte</h4>
+          <p>Acompañamiento continuo, mantenimiento preventivo, soporte técnico con respuesta en máximo 24 horas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <div class="cta-text">
+        <div class="section-tag" style="color:var(--navy)">¿Lista tu institución?</div>
+        <h2>Convierte tu espacio en el <span style="color:var(--navy);border-bottom:3px solid var(--navy)">próximo caso de éxito</span></h2>
+        <p>Agenda una visita técnica gratuita y recibe una propuesta personalizada para tu institución o empresa.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://wa.me/593999819542" target="_blank" class="btn btn-dark btn-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Hablar por WhatsApp
+        </a>
+        <a href="contacto.html" class="btn btn-outline-dark btn-lg">Solicitar propuesta</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <img src="assets/isotipo-color.png" alt="EcoTouch Logo" class="logo-img">
+          <span class="logo-text">EcoTouch</span>
+        </a>
+        <p>El puente entre la tecnología de vanguardia y las instituciones que lideran el futuro del Ecuador.</p>
+        <div class="social-links" style="margin-top:20px">
+          <a href="https://www.instagram.com/ecotouch.ec" target="_blank" class="social-link" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://wa.me/593999819542" target="_blank" class="social-link" aria-label="WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-title">Soluciones</p>
+        <ul class="footer-links">
+          <li><a href="pantallas.html">Pantallas Interactivas</a></li>
+          <li><a href="energia-solar.html">Energía Solar</a></li>
+          <li><a href="proyectos.html">Proyectos</a></li>
+          <li><a href="contacto.html">Solicitar propuesta</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-title">Empresa</p>
+        <ul class="footer-links">
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="proyectos.html">Casos de éxito</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <p class="footer-title">Contacto directo</p>
+        <p>¿Listo para transformar tu institución?</p>
+        <a href="https://wa.me/593999819542" target="_blank" class="btn btn-primary btn-sm" style="margin-top:16px;display:inline-flex;gap:8px">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          +593 999 819 542
+        </a><br>
+        <a href="tel:+593999819542" class="btn btn-outline btn-sm" style="margin-top:10px;display:inline-flex;gap:8px">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          Llamar ahora
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 EcoTouch Ecuador. Todos los derechos reservados.</span>
+      <span>Tecnología de vanguardia para instituciones que lideran el futuro.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Filter functionality for projects
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.proj-card[data-category]').forEach(card => {
+        if (filter === 'all' || card.dataset.category.includes(filter)) {
+          card.style.display = '';
+          card.style.opacity = '1';
+        } else {
+          card.style.opacity = '0.2';
+          card.style.pointerEvents = 'none';
+        }
+      });
+    });
+  });
+</script>
+<script src="main.js"></script>
+</body>
+</html>

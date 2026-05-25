@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto — EcoTouch Ecuador</title>
+  <meta name="description" content="Solicita una propuesta personalizada para tu institución. Contáctanos por WhatsApp, teléfono o formulario. EcoTouch Ecuador, tecnología interactiva y energía solar.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <style>
+    /* ── PAGE-SPECIFIC STYLES ── */
+
+    /* Hero */
+    .con-hero { padding: 180px 0 80px; position: relative; text-align: center; overflow: hidden; }
+    .con-hero::before { content:''; position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(43,131,237,0.15) 0%,transparent 70%); }
+    .con-hero-inner { max-width:660px; margin:0 auto; position:relative;z-index:2; }
+    .con-hero .tag { margin:0 auto 24px; }
+
+    /* Main layout */
+    .contact-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; align-items: start; padding-bottom: 120px; }
+
+    /* Left panel */
+    .contact-left { position: sticky; top: 100px; }
+    .contact-intro h2 { margin-bottom: 16px; }
+    .contact-intro p { margin-bottom: 32px; }
+
+    /* Direct channels */
+    .channel-cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+    .channel-card { display: flex; align-items: center; gap: 16px; padding: 18px 20px; border-radius: var(--r-md); border: 1px solid var(--border); background: var(--bg-card); text-decoration: none; color: var(--white); transition: all 0.3s var(--ease); }
+    .channel-card:hover { border-color: rgba(28,247,153,0.4); background: rgba(28,247,153,0.05); transform: translateX(4px); }
+    .channel-card.wa:hover { border-color: rgba(37,211,102,0.5); background: rgba(37,211,102,0.06); }
+    .channel-card.phone:hover { border-color: rgba(43,131,237,0.5); background: rgba(43,131,237,0.06); }
+    .channel-card.ig:hover { border-color: rgba(193,53,132,0.4); background: rgba(193,53,132,0.05); }
+    .channel-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .channel-card.wa .channel-icon { background: rgba(37,211,102,0.12); border: 1px solid rgba(37,211,102,0.25); }
+    .channel-card.phone .channel-icon { background: rgba(43,131,237,0.12); border: 1px solid rgba(43,131,237,0.25); }
+    .channel-card.ig .channel-icon { background: rgba(193,53,132,0.1); border: 1px solid rgba(193,53,132,0.2); }
+    .channel-info { flex: 1; }
+    .channel-label { font-size: 0.75rem; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+    .channel-value { font-family: var(--font-brand); font-size: 0.95rem; font-weight: 600; color: var(--white); }
+    .channel-arrow { color: rgba(255,255,255,0.3); transition: transform 0.3s; }
+    .channel-card:hover .channel-arrow { transform: translateX(4px); color: var(--green); }
+
+    /* Response badge */
+    .response-badge { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: var(--r-md); background: rgba(28,247,153,0.06); border: 1px solid rgba(28,247,153,0.2); }
+    .response-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite; flex-shrink:0; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(0.85)} }
+    .response-text { font-size: 0.82rem; color: rgba(255,255,255,0.7); }
+    .response-text strong { color: var(--green); }
+
+    /* Form card */
+    .form-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: var(--r-xl); padding: 48px; }
+    .form-card h3 { font-size: 1.4rem; margin-bottom: 6px; }
+    .form-card > p { font-size: 0.9rem; margin-bottom: 36px; }
+
+    /* Form elements */
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .form-group label { font-size: 0.82rem; font-family: var(--font-brand); font-weight: 600; color: rgba(255,255,255,0.7); letter-spacing: 0.03em; }
+    .form-group label .req { color: var(--green); margin-left: 2px; }
+    .form-control { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--r-sm); padding: 13px 16px; color: var(--white); font-family: var(--font-body); font-size: 0.92rem; transition: all 0.25s var(--ease); width: 100%; outline: none; appearance: none; -webkit-appearance: none; }
+    .form-control::placeholder { color: rgba(255,255,255,0.3); }
+    .form-control:focus { border-color: rgba(28,247,153,0.5); background: rgba(28,247,153,0.04); box-shadow: 0 0 0 3px rgba(28,247,153,0.08); }
+    .form-control:hover:not(:focus) { border-color: rgba(255,255,255,0.2); }
+    select.form-control option { background: #0a1a2e; color: var(--white); }
+    textarea.form-control { resize: vertical; min-height: 120px; }
+
+    /* Type selector */
+    .type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .type-option { display: none; }
+    .type-label { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 14px 10px; border-radius: var(--r-md); border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); cursor: pointer; text-align: center; transition: all 0.25s var(--ease); font-size: 0.8rem; color: rgba(255,255,255,0.55); }
+    .type-label svg { opacity: 0.5; transition: opacity 0.25s; }
+    .type-option:checked + .type-label { border-color: rgba(28,247,153,0.5); background: rgba(28,247,153,0.08); color: var(--green); }
+    .type-option:checked + .type-label svg { opacity: 1; }
+    .type-label:hover { border-color: rgba(28,247,153,0.3); color: rgba(28,247,153,0.8); }
+
+    /* Submit button */
+    .btn-submit { width: 100%; padding: 16px 32px; background: linear-gradient(135deg, var(--green), #14d880); color: #001a08; font-family: var(--font-brand); font-size: 1rem; font-weight: 700; border-radius: var(--r-md); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s var(--ease); margin-top: 8px; }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(28,247,153,0.35); }
+    .btn-submit:active { transform: translateY(0); }
+    .btn-submit .spinner { display: none; width: 18px; height: 18px; border: 2px solid rgba(0,26,8,0.3); border-top-color: #001a08; border-radius: 50%; animation: spin 0.7s linear infinite; }
+    .btn-submit.loading .spinner { display: block; }
+    .btn-submit.loading .btn-text { opacity: 0.7; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Success state */
+    .form-success { display: none; text-align: center; padding: 48px 32px; }
+    .form-success.show { display: block; }
+    .form-card.submitted .form-body { display: none; }
+    .success-icon { width: 72px; height: 72px; border-radius: 50%; background: rgba(28,247,153,0.12); border: 2px solid rgba(28,247,153,0.4); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+    .form-success h3 { margin-bottom: 12px; }
+
+    /* Privacy note */
+    .privacy-note { font-size: 0.75rem; color: rgba(255,255,255,0.35); text-align: center; margin-top: 16px; line-height: 1.5; }
+
+    /* FAQ section */
+    .faq-section { padding: 100px 0; background: rgba(255,255,255,0.02); border-top: 1px solid var(--border); }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 56px; }
+    .faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-md); padding: 28px; transition: all 0.3s var(--ease); cursor: pointer; }
+    .faq-item:hover { border-color: rgba(43,131,237,0.3); }
+    .faq-q { font-family: var(--font-brand); font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 10px; display: flex; align-items: flex-start; gap: 12px; }
+    .faq-q::before { content: 'P:'; color: var(--blue); flex-shrink: 0; font-size: 0.85rem; margin-top: 1px; }
+    .faq-a { font-size: 0.85rem; color: rgba(255,255,255,0.58); line-height: 1.7; padding-left: 30px; }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .contact-layout { grid-template-columns: 1fr; }
+      .contact-left { position: static; }
+      .channel-cards { flex-direction: row; flex-wrap: wrap; }
+      .channel-card { flex: 1; min-width: 200px; }
+    }
+    @media (max-width: 768px) {
+      .form-card { padding: 28px; }
+      .form-row { grid-template-columns: 1fr; }
+      .type-grid { grid-template-columns: 1fr 1fr; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .channel-cards { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="mainHeader">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="assets/isotipo-color.png" alt="EcoTouch Logo" class="logo-img">
+        <span class="logo-text">EcoTouch</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html">Inicio</a>
+        <a href="pantallas.html">Pantallas Interactivas</a>
+        <a href="energia-solar.html">Energía Solar</a>
+        <a href="proyectos.html">Proyectos</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="contacto.html" class="active">Contacto</a>
+      </nav>
+      <div class="header-cta">
+        <a href="contacto.html" class="btn btn-outline btn-sm">Solicitar propuesta</a>
+        <a href="https://wa.me/593999819542" target="_blank" class="btn btn-primary btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <button class="menu-toggle" aria-label="Menú"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav">
+  <a href="index.html">Inicio</a>
+  <a href="pantallas.html">Pantallas Interactivas</a>
+  <a href="energia-solar.html">Energía Solar</a>
+  <a href="proyectos.html">Proyectos</a>
+  <a href="nosotros.html">Nosotros</a>
+  <a href="contacto.html">Contacto</a>
+  <a href="https://wa.me/593999819542" target="_blank" class="btn btn-wa">Escribir por WhatsApp</a>
+</nav>
+
+<!-- HERO -->
+<section class="con-hero">
+  <div class="orb orb-blue" style="width:500px;height:500px;top:-200px;right:-100px;opacity:0.25"></div>
+  <div class="orb orb-green" style="width:400px;height:400px;bottom:-100px;left:-80px;opacity:0.18"></div>
+  <div class="container">
+    <div class="con-hero-inner reveal">
+      <div class="tag">Respuesta en menos de 24 horas</div>
+      <h1>Hablemos sobre el <span class="grad-text">futuro</span> de tu institución</h1>
+      <p class="lead" style="margin-top:20px">Sin compromisos ni tecnicismos. Cuéntanos qué necesitas y te preparamos una propuesta a la medida de tu presupuesto e institución.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTACT AREA -->
+<section style="padding-bottom:0">
+  <div class="container">
+    <div class="contact-layout">
+
+      <!-- LEFT: Direct channels -->
+      <div class="contact-left reveal-left">
+        <div class="contact-intro">
+          <h2>¿Prefieres contacto <span class="grad-text">directo?</span></h2>
+          <p>Si necesitas respuesta inmediata, estos son los canales más rápidos para hablar con nuestro equipo.</p>
+        </div>
+
+        <div class="channel-cards">
+          <a href="https://wa.me/593999819542" target="_blank" class="channel-card wa">
+            <div class="channel-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            <div class="channel-info">
+              <div class="channel-label">WhatsApp</div>
+              <div class="channel-value">+593 999 819 542</div>
+            </div>
+            <svg class="channel-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+
+          <a href="tel:+593999819542" class="channel-card phone">
+            <div class="channel-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2b83ed" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+            </div>
+            <div class="channel-info">
+              <div class="channel-label">Llamada directa</div>
+              <div class="channel-value">+593 999 819 542</div>
+            </div>
+            <svg class="channel-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+
+          <a href="https://www.instagram.com/ecotouch.ec" target="_blank" class="channel-card ig">
+            <div class="channel-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c13584" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </div>
+            <div class="channel-info">
+              <div class="channel-label">Instagram</div>
+              <div class="channel-value">@ecotouch.ec</div>
+            </div>
+            <svg class="channel-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="response-badge">
+          <div class="response-dot"></div>
+          <div class="response-text">Respondemos en <strong>menos de 24 horas hábiles</strong>. Por WhatsApp, generalmente mucho antes.</div>
+        </div>
+
+        <!-- Trust signals -->
+        <div style="margin-top:36px;padding:24px;border-radius:var(--r-md);background:rgba(255,255,255,0.02);border:1px solid var(--border)">
+          <p style="font-family:var(--font-brand);font-size:0.85rem;font-weight:700;color:var(--white);margin-bottom:16px">Por qué confiar en EcoTouch</p>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;gap:10px;align-items:center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1cf799" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="font-size:0.82rem;color:rgba(255,255,255,0.65)">+700 pantallas instaladas en Ecuador</span>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1cf799" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="font-size:0.82rem;color:rgba(255,255,255,0.65)">Garantía técnica real de 5 años</span>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1cf799" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="font-size:0.82rem;color:rgba(255,255,255,0.65)">Propuestas personalizadas sin compromiso</span>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1cf799" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="font-size:0.82rem;color:rgba(255,255,255,0.65)">Soporte técnico con respuesta en 24h</span>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1cf799" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="font-size:0.82rem;color:rgba(255,255,255,0.65)">6 años de trayectoria en Ecuador</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Form -->
+      <div class="reveal-right">
+        <div class="form-card" id="contactFormCard">
+
+          <h3>Solicita tu <span class="grad-text">propuesta</span></h3>
+          <p>Completa el formulario y te enviamos una propuesta personalizada en menos de 24 horas.</p>
+
+          <!-- Success message (hidden by default) -->
+          <div class="form-success" id="formSuccess">
+            <div class="success-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1cf799" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3>¡Mensaje enviado!</h3>
+            <p style="margin-bottom:24px">Gracias por contactarnos. Nuestro equipo revisará tu solicitud y te responderá en menos de 24 horas hábiles.</p>
+            <p style="font-size:0.85rem">Para respuesta inmediata, también puedes escribirnos por:</p>
+            <a href="https://wa.me/593999819542" target="_blank" class="btn btn-primary btn-sm" style="display:inline-flex;gap:8px;margin-top:16px">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              WhatsApp: +593 999 819 542
+            </a>
+          </div>
+
+          <!-- Form body -->
+          <div class="form-body" id="formBody">
+
+            <!-- Type of interest -->
+            <div class="form-group" style="margin-bottom:28px">
+              <label>¿Qué te interesa?<span class="req">*</span></label>
+              <div class="type-grid">
+                <div>
+                  <input type="radio" name="tipo" id="tipo-pantallas" value="Pantallas Interactivas" class="type-option" checked>
+                  <label for="tipo-pantallas" class="type-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    Pantallas Interactivas
+                  </label>
+                </div>
+                <div>
+                  <input type="radio" name="tipo" id="tipo-solar" value="Energía Solar" class="type-option">
+                  <label for="tipo-solar" class="type-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    Energía Solar
+                  </label>
+                </div>
+                <div>
+                  <input type="radio" name="tipo" id="tipo-ambos" value="Ambas soluciones" class="type-option">
+                  <label for="tipo-ambos" class="type-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    Ambas
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Name & Institution -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nombre">Nombre completo<span class="req">*</span></label>
+                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Tu nombre" required autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label for="institucion">Institución / Empresa<span class="req">*</span></label>
+                <input type="text" id="institucion" name="institucion" class="form-control" placeholder="Nombre de tu organización" required>
+              </div>
+            </div>
+
+            <!-- Cargo & Ciudad -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cargo">Cargo / Rol</label>
+                <input type="text" id="cargo" name="cargo" class="form-control" placeholder="Director, Rector, Gerente...">
+              </div>
+              <div class="form-group">
+                <label for="ciudad">Ciudad<span class="req">*</span></label>
+                <select id="ciudad" name="ciudad" class="form-control" required>
+                  <option value="" disabled selected>Selecciona tu ciudad</option>
+                  <option>Guayaquil</option>
+                  <option>Quito</option>
+                  <option>Cuenca</option>
+                  <option>Ambato</option>
+                  <option>Manta</option>
+                  <option>Portoviejo</option>
+                  <option>Santo Domingo</option>
+                  <option>Loja</option>
+                  <option>Machala</option>
+                  <option>Esmeraldas</option>
+                  <option>Riobamba</option>
+                  <option>Otra ciudad</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Email & Phone -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Correo electrónico<span class="req">*</span></label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="tu@correo.com" required autocomplete="email">
+              </div>
+              <div class="form-group">
+                <label for="telefono">WhatsApp / Teléfono<span class="req">*</span></label>
+                <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="+593 9XX XXX XXX" required autocomplete="tel">
+              </div>
+            </div>
+
+            <!-- Message -->
+            <div class="form-group">
+              <label for="mensaje">¿Qué necesitas?</label>
+              <textarea id="mensaje" name="mensaje" class="form-control" placeholder="Cuéntanos sobre tu proyecto: número de aulas o espacios, tipo de institución, cronograma estimado, preguntas específicas..."></textarea>
+            </div>
+
+            <!-- Submit -->
+            <button type="button" class="btn-submit" id="submitBtn" onclick="handleSubmit()">
+              <div class="spinner"></div>
+              <span class="btn-text">Enviar solicitud de propuesta</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+
+            <p class="privacy-note">
+              Tu información es confidencial y solo se usará para preparar tu propuesta. No compartimos datos con terceros.<br>
+              Al enviar este formulario aceptas que EcoTouch te contacte para hacerte llegar tu propuesta personalizada.
+            </p>
+          </div><!-- end form-body -->
+
+        </div><!-- end form-card -->
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <div style="text-align:center;max-width:600px;margin:0 auto" class="reveal">
+      <div class="section-tag">Preguntas frecuentes</div>
+      <h2 style="margin-top:16px">Preguntas antes de <span class="grad-text">contactarnos</span></h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item reveal">
+        <div class="faq-q">¿Cuánto tiempo tarda la instalación de pantallas?</div>
+        <p class="faq-a">Depende del número de pantallas y las condiciones del espacio. Una instalación estándar de 1 a 5 pantallas generalmente se completa en 1 a 2 días hábiles. Proyectos mayores se planifican según un cronograma acordado con la institución.</p>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">¿La garantía de 5 años incluye repuestos y mano de obra?</div>
+        <p class="faq-a">Sí. Nuestra garantía cubre defectos de fabricación, fallas técnicas y mantenimiento preventivo. El soporte técnico incluye visita en sitio con respuesta en máximo 24 horas hábiles.</p>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">¿Trabajan con instituciones públicas y privadas?</div>
+        <p class="faq-a">Trabajamos con ambas. Nuestra cartera de clientes incluye universidades privadas, colegios fiscales, instituciones fiscomisos y empresas privadas de distintos sectores. Cada propuesta se adapta a los procesos de adquisición de cada tipo de institución.</p>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">¿Qué pasa después de la instalación?</div>
+        <p class="faq-a">Realizamos capacitación técnica y pedagógica al personal, entregamos materiales de apoyo digital y activamos el plan de soporte post-instalación. Nuestro equipo permanece disponible para cualquier consulta técnica durante toda la garantía.</p>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">¿Ofrecen financiamiento o facilidades de pago?</div>
+        <p class="faq-a">Sí. Trabajamos con distintas modalidades de pago según el tamaño del proyecto. Conversemos sobre tu caso específico para estructurar la mejor opción para tu institución.</p>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">¿Tienen cobertura en todo Ecuador?</div>
+        <p class="faq-a">Tenemos cobertura nacional. Hemos instalado proyectos en Guayaquil, Quito, Cuenca, Manabí, Machala, y otras ciudades del país. Coordinamos la logística y el soporte técnico en cada región.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <img src="assets/isotipo-color.png" alt="EcoTouch Logo" class="logo-img">
+          <span class="logo-text">EcoTouch</span>
+        </a>
+        <p>El puente entre la tecnología de vanguardia y las instituciones que lideran el futuro del Ecuador.</p>
+        <div class="social-links" style="margin-top:20px">
+          <a href="https://www.instagram.com/ecotouch.ec" target="_blank" class="social-link" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://wa.me/593999819542" target="_blank" class="social-link" aria-label="WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-title">Soluciones</p>
+        <ul class="footer-links">
+          <li><a href="pantallas.html">Pantallas Interactivas</a></li>
+          <li><a href="energia-solar.html">Energía Solar</a></li>
+          <li><a href="proyectos.html">Proyectos</a></li>
+          <li><a href="contacto.html">Solicitar propuesta</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-title">Empresa</p>
+        <ul class="footer-links">
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="proyectos.html">Casos de éxito</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <p class="footer-title">Contacto directo</p>
+        <p>¿Listo para transformar tu institución?</p>
+        <a href="https://wa.me/593999819542" target="_blank" class="btn btn-primary btn-sm" style="margin-top:16px;display:inline-flex;gap:8px">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          +593 999 819 542
+        </a><br>
+        <a href="tel:+593999819542" class="btn btn-outline btn-sm" style="margin-top:10px;display:inline-flex;gap:8px">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          Llamar ahora
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 EcoTouch Ecuador. Todos los derechos reservados.</span>
+      <span>Tecnología de vanguardia para instituciones que lideran el futuro.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── FORM SUBMISSION HANDLER ──
+  // This form sends data to click.soluciones.ecuador@gmail.com via EmailJS or Formspree.
+  // TO ACTIVATE REAL SENDING, choose ONE of the two options below:
+  //
+  // OPTION A — Formspree (easiest, free tier):
+  //   1. Go to https://formspree.io and create a free account
+  //   2. Create a new form and set the email to: click.soluciones.ecuador@gmail.com
+  //   3. Copy your form ID (e.g. "xpzgkqra") and paste it below replacing "YOUR_FORM_ID"
+  //
+  // OPTION B — EmailJS (free tier, 200 emails/month):
+  //   1. Go to https://emailjs.com and create a free account
+  //   2. Create a service, template, and get your public key
+  //   3. Uncomment the EmailJS block below and fill in your credentials
+
+  const FORMSPREE_ID = 'YOUR_FORM_ID'; // Replace with your Formspree form ID
+
+  async function handleSubmit() {
+    const btn = document.getElementById('submitBtn');
+    const card = document.getElementById('contactFormCard');
+    const formSuccess = document.getElementById('formSuccess');
+
+    // Collect data
+    const tipo = document.querySelector('input[name="tipo"]:checked')?.value || '';
+    const nombre = document.getElementById('nombre').value.trim();
+    const institucion = document.getElementById('institucion').value.trim();
+    const cargo = document.getElementById('cargo').value.trim();
+    const ciudad = document.getElementById('ciudad').value;
+    const email = document.getElementById('email').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
+    const mensaje = document.getElementById('mensaje').value.trim();
+
+    // Basic validation
+    if (!nombre || !institucion || !ciudad || !email || !telefono) {
+      alert('Por favor completa los campos obligatorios (marcados con *).');
+      return;
+    }
+    if (!email.includes('@')) {
+      alert('Por favor ingresa un correo electrónico válido.');
+      return;
+    }
+
+    // Show loading state
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    // ── ACTIVE SUBMISSION ──
+    if (FORMSPREE_ID !== 'YOUR_FORM_ID') {
+      // OPTION A: Formspree
+      try {
+        const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ tipo, nombre, institucion, cargo, ciudad, email, telefono, mensaje })
+        });
+        if (response.ok) {
+          showSuccess(card, formSuccess);
+        } else {
+          throw new Error('Error en el envío');
+        }
+      } catch (err) {
+        btn.classList.remove('loading');
+        btn.disabled = false;
+        alert('Hubo un problema al enviar el formulario. Por favor contáctanos directamente por WhatsApp: +593 999 819 542');
+      }
+    } else {
+      // DEMO MODE: simulate sending (remove this block once you configure Formspree)
+      setTimeout(() => { showSuccess(card, formSuccess); }, 1200);
+    }
+  }
+
+  function showSuccess(card, successEl) {
+    card.classList.add('submitted');
+    successEl.classList.add('show');
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+</script>
+<script src="main.js"></script>
+</body>
+</html>
